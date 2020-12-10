@@ -1,194 +1,107 @@
-A handler written in Go that demonstrates interacting with GitHub through a
-webhook.
+# sync github project desc stars
 
-## Before you begin
 
-You must meet the following requirements to run this sample:
 
-- Own a public domain. For example, you can create a domain with
-  [Google Domains](https://domains.google/).
-- A Kubernetes cluster running with the following:
-  - Knative Serving must be installed. For details about setting up a Knative
-    cluster, see the [installation guides](../../../install/README.md).
-  - Your Knative cluster must be
-    [configured to use your custom domain](../../using-a-custom-domain.md).
-  - You must ensure that your Knative cluster uses a static IP address:
-    - For Google Kubernetes Engine, see
-      [assigning a static IP address](../../gke-assigning-static-ip-address.md).
-    - For other cloud providers, refer to your provider's documentation.
-- An installed version of [Docker](https://www.docker.com).
-- A [Docker Hub account](https://hub.docker.com/) to which you are able to
-  upload your sample's container image.
 
-## Build the sample code
-
-1. Download a copy of the code:
-
-   ```shell
-   git clone -b "{{< branch >}}" https://github.com/knative/docs knative-docs
-   cd knative-docs/docs/serving/samples/gitwebhook-go
-   ```
-
-1. Use Docker to build a container image for this service. Replace
-   `{DOCKER_HUB_USERNAME}` with your Docker Hub username in the following
-   commands.
-
-   ```shell
-   export DOCKER_HUB_USERNAME=username
-
-   # Build the container, run from the project folder
-   docker build -t ${DOCKER_HUB_USERNAME}/gitwebhook-go .
-
-   # Push the container to the registry
-   docker push ${DOCKER_HUB_USERNAME}/gitwebhook-go
-   ```
-
-1. Create a secret that holds two values from GitHub:
-
-   - A
-     [personal access token](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
-     that you will use to make API requests to GitHub.
-   - Ensure that you grant `read/write` permission in the repo for that personal
-     access token.
-
-   1. Follow the GitHub instructions to
-
-   - A webhook secret that you will use to validate requests.
-
-   1. Base64 encode the access token:
-
-      ```shell
-      $ echo -n "45d382d4a9a93c453fb7c8adc109121e7c29fa3ca" | base64
-      NDVkMzgyZDRhOWE5M2M0NTNmYjdjOGFkYzEwOTEyMWU3YzI5ZmEzY2E=
-      ```
-
-   1. Copy the encoded access token into `github-secret.yaml` next to
-      `personalAccessToken:`.
-
-   1. Create a webhook secret value unique to this sample, base64 encode it, and
-      copy it into `github-secret.yaml` next to `webhookSecret:`:
-
-      ```shell
-      $ echo -n "mygithubwebhooksecret" | base64
-      bXlnaXRodWJ3ZWJob29rc2VjcmV0
-      ```
-
-   1. Apply the secret to your cluster:
-
-      ```shell
-      kubectl apply --filename github-secret.yaml
-      ```
-
-1. Next, update the `service.yaml` file in the project to reference the tagged
-   image from step 1.
-
-   ```yaml
-   apiVersion: serving.knative.dev/v1
-   kind: Service
-   metadata:
-     name: gitwebhook
-     namespace: default
-   spec:
-     template:
-       spec:
-         containers:
-           - # Replace {DOCKER_HUB_USERNAME} with your actual docker hub username
-             image: docker.io/{DOCKER_HUB_USERNAME}/gitwebhook-go:latest
-             env:
-               - name: GITHUB_PERSONAL_TOKEN
-                 valueFrom:
-                   secretKeyRef:
-                     name: githubsecret
-                     key: personalAccessToken
-               - name: WEBHOOK_SECRET
-                 valueFrom:
-                   secretKeyRef:
-                     name: githubsecret
-                     key: webhookSecret
-   ```
-
-1. Use `kubectl` to apply the `service.yaml` file.
-
-   ```shell
-   $ kubectl apply --filename service.yaml
-   ```
-
-   Response:
-
-   ```shell
-   service "gitwebhook" created
-   ```
-
-1. Create a webhook in your GitHub repo using the URL for your `gitwebhook`
-   service:
-
-   1. Retrieve the hostname for this service, using the following command:
-
-      ```shell
-      $ kubectl get ksvc gitwebhook \
-         --output=custom-columns=NAME:.metadata.name,DOMAIN:.status.domain
-      ```
-
-      Example response:
-
-      ```shell
-      NAME                DOMAIN
-      gitwebhook          gitwebhook.default.MYCUSTOMDOMAIN.com
-      ```
-
-      where `MYCUSTOMDOMAIN` is the domain that you set as your
-      [custom domain](../../using-a-custom-domain.md).
-
-   1. Go to the GitHub repository for which you have privileges to create a
-      webhook.
-
-   1. Click **Settings** > **Webhooks** > **Add webhook** to open the Webhooks
-      page.
-
-   1. Enter the **Payload URL** as `http://{DOMAIN}`, where `{DOMAIN}` is the
-      address from the `kubectl get ksvc gitwebhook` command. For example:
-      `http://gitwebhook.default.MYCUSTOMDOMAIN.com`
-
-   1. Set the **Content type** to `application/json`.
-
-   1. Enter your webhook secret in **Secret** using the original base value that
-      you set in `webhookSecret` (not the base64 encoded value). For example:
-      `mygithubwebhooksecret`
-
-   1. If you did not [enabled TLS certificates](../../using-a-tls-cert.md),
-      click **Disable** under **SSL Validation**.
-
-   1. Click **Add webhook** to create the webhook.
-
-## Exploring
-
-Once deployed, you can inspect the created resources with `kubectl` commands:
-
-```shell
-# This will show the Knative service that we created:
-kubectl get ksvc --output yaml
-
-# This will show the Route, created by the service:
-kubectl get route --output yaml
-
-# This will show the Configuration, created by the service:
-kubectl get configurations --output yaml
-
-# This will show the Revision, created by the Configuration:
-kubectl get revisions --output yaml
-```
-
-## Testing the service
-
-Now that you have the service running and the webhook created, send a Pull
-Request to the same GitHub repo where you added the webhook. If all is working
-right, you'll see the title of the PR will be modified, with the text
-`(looks pretty legit)` appended the end of the title.
-
-## Cleaning up
-
-To clean up the sample service:
-
-```shell
-kubectl delete --filename service.yaml
-```
+|  仓库   | stars  | 
+|-----|-------| 
+|[go](https://github.com/golang/go.git)|79654|
+|[awesome-go](https://github.com/avelino/awesome-go.git)|59713|
+|[gin](https://github.com/gin-gonic/gin.git)|43987|
+|[project-based-learning](https://github.com/tuvtran/project-based-learning.git)|41698|
+|[build-web-application-with-golang](https://github.com/astaxie/build-web-application-with-golang.git)|36380|
+|[v2ray-core](https://github.com/v2ray/v2ray-core.git)|35961|
+|[traefik](https://github.com/traefik/traefik.git)|31841|
+|[rclone](https://github.com/rclone/rclone.git)|24920|
+|[gitea](https://github.com/go-gitea/gitea.git)|22698|
+|[gorm](https://github.com/go-gorm/gorm.git)|21973|
+|[cli](https://github.com/cli/cli.git)|20401|
+|[project-layout](https://github.com/golang-standards/project-layout.git)|19737|
+|[cobra](https://github.com/spf13/cobra.git)|19606|
+|[iris](https://github.com/kataras/iris.git)|19585|
+|[mattermost-server](https://github.com/mattermost/mattermost-server.git)|19523|
+|[faas](https://github.com/openfaas/faas.git)|18890|
+|[kit](https://github.com/go-kit/kit.git)|18832|
+|[micro](https://github.com/zyedidia/micro.git)|15583|
+|[go-micro](https://github.com/asim/go-micro.git)|14976|
+|[delve](https://github.com/go-delve/delve.git)|14942|
+|[lime](https://github.com/limetext/lime.git)|14835|
+|[dgraph](https://github.com/dgraph-io/dgraph.git)|14423|
+|[go-patterns](https://github.com/tmrts/go-patterns.git)|14189|
+|[advanced-go-programming-book](https://github.com/chai2010/advanced-go-programming-book.git)|14110|
+|[ultimate-go](https://github.com/hoanhan101/ultimate-go.git)|14073|
+|[websocket](https://github.com/gorilla/websocket.git)|13517|
+|[Qix](https://github.com/ty4z2008/Qix.git)|13421|
+|[clash](https://github.com/Dreamacro/clash.git)|13251|
+|[dep](https://github.com/golang/dep.git)|13232|
+|[vim-go](https://github.com/fatih/vim-go.git)|12910|
+|[colly](https://github.com/gocolly/colly.git)|12560|
+|[learn-go-with-tests](https://github.com/quii/learn-go-with-tests.git)|12434|
+|[httprouter](https://github.com/julienschmidt/httprouter.git)|12116|
+|[testify](https://github.com/stretchr/testify.git)|12037|
+|[wtf](https://github.com/wtfutil/wtf.git)|11967|
+|[codis](https://github.com/CodisLabs/codis.git)|11587|
+|[fyne](https://github.com/fyne-io/fyne.git)|11434|
+|[zap](https://github.com/uber-go/zap.git)|11374|
+|[kratos](https://github.com/go-kratos/kratos.git)|11116|
+|[croc](https://github.com/schollz/croc.git)|11018|
+|[pan-light](https://github.com/peterq/pan-light.git)|10943|
+|[k6](https://github.com/loadimpact/k6.git)|10662|
+|[fiber](https://github.com/gofiber/fiber.git)|10562|
+|[termui](https://github.com/gizak/termui.git)|10411|
+|[redis](https://github.com/go-redis/redis.git)|10270|
+|[mysql](https://github.com/go-sql-driver/mysql.git)|10261|
+|[k9s](https://github.com/derailed/k9s.git)|10200|
+|[LeetCode-Go](https://github.com/halfrost/LeetCode-Go.git)|10019|
+|[transfer.sh](https://github.com/dutchcoders/transfer.sh.git)|9959|
+|[leanote](https://github.com/leanote/leanote.git)|9775|
+|[goproxy](https://github.com/snail007/goproxy.git)|9645|
+|[caire](https://github.com/esimov/caire.git)|9427|
+|[docker-slim](https://github.com/docker-slim/docker-slim.git)|9417|
+|[golang-developer-roadmap](https://github.com/Alikhll/golang-developer-roadmap.git)|9388|
+|[sqlx](https://github.com/jmoiron/sqlx.git)|9382|
+|[act](https://github.com/nektos/act.git)|9382|
+|[micro](https://github.com/micro/micro.git)|9289|
+|[gods](https://github.com/emirpasic/gods.git)|9251|
+|[wuzz](https://github.com/asciimoo/wuzz.git)|9250|
+|[antlr4](https://github.com/antlr/antlr4.git)|8971|
+|[teleport](https://github.com/gravitational/teleport.git)|8822|
+|[OpenDiablo2](https://github.com/OpenDiablo2/OpenDiablo2.git)|8807|
+|[ip2region](https://github.com/lionsoul2014/ip2region.git)|8782|
+|[jwt-go](https://github.com/dgrijalva/jwt-go.git)|8728|
+|[GoBooks](https://github.com/dariubs/GoBooks.git)|8605|
+|[nats-server](https://github.com/nats-io/nats-server.git)|8601|
+|[go](https://github.com/json-iterator/go.git)|8584|
+|[chi](https://github.com/go-chi/chi.git)|8541|
+|[badger](https://github.com/dgraph-io/badger.git)|8484|
+|[sampler](https://github.com/sqshq/sampler.git)|8452|
+|[night](https://github.com/talkgo/night.git)|8449|
+|[casbin](https://github.com/casbin/casbin.git)|8259|
+|[vuls](https://github.com/future-architect/vuls.git)|8130|
+|[glide](https://github.com/Masterminds/glide.git)|8071|
+|[up](https://github.com/apex/up.git)|8031|
+|[qt](https://github.com/therecipe/qt.git)|8027|
+|[guide](https://github.com/uber-go/guide.git)|7969|
+|[annoy](https://github.com/spotify/annoy.git)|7894|
+|[golang-open-source-projects](https://github.com/hackstoic/golang-open-source-projects.git)|7824|
+|[gdbgui](https://github.com/cs01/gdbgui.git)|7711|
+|[awesomo](https://github.com/lk-geimfari/awesomo.git)|7686|
+|[photoprism](https://github.com/photoprism/photoprism.git)|7631|
+|[qrcp](https://github.com/claudiodangelis/qrcp.git)|7493|
+|[go-cloud](https://github.com/google/go-cloud.git)|7451|
+|[gjson](https://github.com/tidwall/gjson.git)|7444|
+|[excelize](https://github.com/360EntSecGroup-Skylar/excelize.git)|7408|
+|[The-Golang-Standard-Library-by-Example](https://github.com/polaris1119/The-Golang-Standard-Library-by-Example.git)|7312|
+|[TabNine](https://github.com/codota/TabNine.git)|7284|
+|[protobuf](https://github.com/golang/protobuf.git)|7268|
+|[pulumi](https://github.com/pulumi/pulumi.git)|7229|
+|[webview](https://github.com/webview/webview.git)|7224|
+|[graphql](https://github.com/graphql-go/graphql.git)|7078|
+|[thanos](https://github.com/thanos-io/thanos.git)|7077|
+|[gotop](https://github.com/cjbassi/gotop.git)|6995|
+|[gobot](https://github.com/hybridgroup/gobot.git)|6872|
+|[negroni](https://github.com/urfave/negroni.git)|6846|
+|[gitleaks](https://github.com/zricethezav/gitleaks.git)|6831|
+|[kind](https://github.com/kubernetes-sigs/kind.git)|6821|
+|[fathom](https://github.com/usefathom/fathom.git)|6716|
+|[GolangTraining](https://github.com/GoesToEleven/GolangTraining.git)|6710|
