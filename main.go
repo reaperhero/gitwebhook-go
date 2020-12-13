@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
+	"sync"
 )
 
 var (
@@ -23,11 +24,18 @@ func init() {
 	json.Unmarshal(byteValue, &jsonconfig)
 }
 
-func createMarkdown(topics []string) {
+func createMarkdown(topics []string, wg *sync.WaitGroup) {
+	wg.Add(1)
 	for _, topic := range topics {
-		go client.SortSearchRepositoryByTopic(topic)
+		go func() {
+			for range client.SortSearchRepositoryByTopic(topic) {
+				wg.Done()
+			}
+		}()
 	}
 }
 func main() {
-	createMarkdown(jsonconfig.Topic)
+	finish := sync.WaitGroup{}
+	createMarkdown(jsonconfig.Topic, &finish)
+	finish.Wait()
 }
