@@ -25,8 +25,8 @@ func init() {
 }
 
 func createMarkdown(topics []string, wg *sync.WaitGroup) {
-	wg.Add(1)
 	for _, topic := range topics {
+		wg.Add(1)
 		go func() {
 			for range client.SortSearchRepositoryByTopic(topic) {
 				wg.Done()
@@ -34,6 +34,8 @@ func createMarkdown(topics []string, wg *sync.WaitGroup) {
 		}()
 	}
 }
+
+
 func main() {
 	finish := sync.WaitGroup{}
 	createMarkdown(jsonconfig.Topic, &finish)

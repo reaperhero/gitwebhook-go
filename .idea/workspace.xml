@@ -2,10 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d9c6ae96-c2e8-49b7-9bc7-4459f89784ab" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/github-secret.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deploy/github-secret.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/github.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/github.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/model/markdown.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/markdown.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/python.md" beforeDir="false" afterPath="$PROJECT_DIR$/report/python.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/deploy/service.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +54,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="go.vgo" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/deploy" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration name="go build github.com/reaperhero/gitwebhook-go" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="gitwebhook-go" />
@@ -82,22 +91,22 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1638" height="319" key="GridCell.Tab.0.bottom" timestamp="1607879323449">
+    <state width="1638" height="378" key="GridCell.Tab.0.bottom" timestamp="1607880865181">
       <screen x="0" y="25" width="1680" height="967" />
     </state>
-    <state width="1638" height="319" key="GridCell.Tab.0.bottom/0.25.1680.967@0.25.1680.967" timestamp="1607879323449" />
-    <state width="1638" height="319" key="GridCell.Tab.0.center" timestamp="1607879323448">
+    <state width="1638" height="378" key="GridCell.Tab.0.bottom/0.25.1680.967@0.25.1680.967" timestamp="1607880865181" />
+    <state width="1638" height="378" key="GridCell.Tab.0.center" timestamp="1607880865181">
       <screen x="0" y="25" width="1680" height="967" />
     </state>
-    <state width="1638" height="319" key="GridCell.Tab.0.center/0.25.1680.967@0.25.1680.967" timestamp="1607879323448" />
-    <state width="1638" height="319" key="GridCell.Tab.0.left" timestamp="1607879323448">
+    <state width="1638" height="378" key="GridCell.Tab.0.center/0.25.1680.967@0.25.1680.967" timestamp="1607880865181" />
+    <state width="1638" height="378" key="GridCell.Tab.0.left" timestamp="1607880865180">
       <screen x="0" y="25" width="1680" height="967" />
     </state>
-    <state width="1638" height="319" key="GridCell.Tab.0.left/0.25.1680.967@0.25.1680.967" timestamp="1607879323448" />
-    <state width="1638" height="319" key="GridCell.Tab.0.right" timestamp="1607879323448">
+    <state width="1638" height="378" key="GridCell.Tab.0.left/0.25.1680.967@0.25.1680.967" timestamp="1607880865180" />
+    <state width="1638" height="378" key="GridCell.Tab.0.right" timestamp="1607880865181">
       <screen x="0" y="25" width="1680" height="967" />
     </state>
-    <state width="1638" height="319" key="GridCell.Tab.0.right/0.25.1680.967@0.25.1680.967" timestamp="1607879323448" />
+    <state width="1638" height="378" key="GridCell.Tab.0.right/0.25.1680.967@0.25.1680.967" timestamp="1607880865181" />
     <state width="1638" height="319" key="GridCell.Tab.1.bottom" timestamp="1607879323450">
       <screen x="0" y="25" width="1680" height="967" />
     </state>

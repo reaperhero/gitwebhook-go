@@ -1,8 +1,8 @@
 package model
 
 import (
+	"fmt"
 	"os"
-	"strconv"
 )
 
 type gitMarkdown struct {
@@ -26,7 +26,7 @@ func (m *gitMarkdown) WriteContext(context string) {
 func (m *gitMarkdown) WriteProjectInfo(name, url string, stars int) {
 	star := ""
 	if stars > 999 {
-		star = strconv.Itoa(stars/1000.0) + "k"
+		star = fmt.Sprintf("%.1f", float32(stars) / 1000) + "k"
 	}
 
 	if !m.HasTitle {
