@@ -1,5 +1,6 @@
 package main
 
 type config struct {
-	Token string
+	Token string   `json:"token"`
+	Topic []string `json:"topic"`
 }

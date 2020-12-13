@@ -12,7 +12,7 @@ type gitMarkdown struct {
 
 func NewGitMarkdown(filename string) *gitMarkdown {
 	f, _ := os.Create(filename)
-	f.WriteString("# sync github project desc stars\n\n\n\n\n")
+	f.WriteString("# topic star desc \n\n\n\n\n")
 	return &gitMarkdown{
 		File: f,
 	}

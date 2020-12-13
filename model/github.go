@@ -6,6 +6,10 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
+const (
+	exportDir = "report/"
+)
+
 type clientGithub struct {
 	GithubClient *github.Client
 }
@@ -16,24 +20,16 @@ func NewClientGithub() *clientGithub {
 	}
 }
 
-func (g *clientGithub) SearchRepositoryByTopic() {
-	topics, _, err := g.GithubClient.Search.Topics(context.Background(), "kubernetes", nil)
-	if err != nil {
-		logrus.Warn(err)
-	}
-	logrus.Info(topics.Topics[0].GetDisplayName())
-}
-
-func (g *clientGithub) SortSearchRepositoryByTopic() {
+func (g *clientGithub) SortSearchRepositoryByTopic(topicName string) {
 	opts := &github.SearchOptions{Sort: "stars", Order: "desc", ListOptions: github.ListOptions{Page: 1, PerPage: 100}}
-	result, _, err := g.GithubClient.Search.Repositories(context.Background(), "golang", opts)
+	result, _, err := g.GithubClient.Search.Repositories(context.Background(), topicName, opts)
 	if err != nil {
 		logrus.Warn(err)
 		return
 	}
-	markdown := NewGitMarkdown("README.md")
+	markdown := NewGitMarkdown(exportDir + topicName + ".md")
 	for _, repository := range result.Repositories {
-		markdown.WriteProjectInfo(*repository.Name , *repository.CloneURL , *repository.StargazersCount)
+		markdown.WriteProjectInfo(*repository.Name, *repository.CloneURL, *repository.StargazersCount)
 	}
 	markdown.File.Close()
 }
