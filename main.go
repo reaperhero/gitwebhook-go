@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"github.com/reaperhero/gitwebhook-go/model"
+	"github.com/reaperhero/gitwebhook-go/service"
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
@@ -12,7 +12,7 @@ import (
 
 var (
 	jsonconfig = config{}
-	client     = model.NewClientGithub()
+	client     = service.NewClientGithub()
 )
 
 func init() {
@@ -38,6 +38,15 @@ func createMarkdown(topics []string, wg *sync.WaitGroup) {
 }
 
 func main() {
+	//syncTask()
+	//result, _ := client.ListSummaryOrganization("octokit")
+	//logrus.Println(result)
+	result,_ := client.GetRepositoryDetail("/google/go-github")
+	logrus.Info(result)
+
+}
+
+func syncTask() {
 	finish := sync.WaitGroup{}
 	createMarkdown(jsonconfig.Topic, &finish)
 	finish.Wait()
