@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"os"
 	"sync"
+	"time"
 )
 
 var (
@@ -25,16 +26,16 @@ func init() {
 }
 
 func createMarkdown(topics []string, wg *sync.WaitGroup) {
+	wg.Add(len(topics))
 	for _, topic := range topics {
-		wg.Add(1)
 		go func() {
 			for range client.SortSearchRepositoryByTopic(topic) {
 				wg.Done()
 			}
 		}()
+		time.Sleep(time.Second * 10)
 	}
 }
-
 
 func main() {
 	finish := sync.WaitGroup{}

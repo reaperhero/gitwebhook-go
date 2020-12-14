@@ -5,7 +5,7 @@
 
 |  仓库   | stars  | 
 |-----|-------| 
-|[ohmyzsh](https://github.com/ohmyzsh/ohmyzsh.git)|120.6k|
+|[ohmyzsh](https://github.com/ohmyzsh/ohmyzsh.git)|120.7k|
 |[thefuck](https://github.com/nvbn/thefuck.git)|57.8k|
 |[nvm](https://github.com/nvm-sh/nvm.git)|45.6k|
 |[git](https://github.com/git/git.git)|35.2k|
@@ -22,10 +22,10 @@
 |[acme.sh](https://github.com/acmesh-official/acme.sh.git)|20.3k|
 |[upterm](https://github.com/railsware/upterm.git)|19.6k|
 |[fish-shell](https://github.com/fish-shell/fish-shell.git)|16.0k|
-|[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions.git)|15.6k|
+|[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions.git)|15.7k|
 |[spaceship-prompt](https://github.com/denysdovhan/spaceship-prompt.git)|13.5k|
 |[starship](https://github.com/starship/starship.git)|13.0k|
-|[.tmux](https://github.com/gpakosz/.tmux.git)|12.9k|
+|[.tmux](https://github.com/gpakosz/.tmux.git)|13.0k|
 |[openvpn-install](https://github.com/Nyr/openvpn-install.git)|12.6k|
 |[bash-it](https://github.com/Bash-it/bash-it.git)|12.0k|
 |[shelljs](https://github.com/shelljs/shelljs.git)|11.5k|
@@ -82,15 +82,15 @@
 |[xonsh](https://github.com/xonsh/xonsh.git)|4.1k|
 |[elvish](https://github.com/elves/elvish.git)|4.1k|
 |[zsh-completions](https://github.com/zsh-users/zsh-completions.git)|4.0k|
-|[xiki](https://github.com/trogdoro/xiki.git)|3.7k|
+|[xiki](https://github.com/trogdoro/xiki.git)|3.8k|
 |[dotfiles](https://github.com/paulirish/dotfiles.git)|3.7k|
 |[shellharden](https://github.com/anordal/shellharden.git)|3.6k|
 |[privilege-escalation-awesome-scripts-suite](https://github.com/carlospolop/privilege-escalation-awesome-scripts-suite.git)|3.6k|
 |[android-common](https://github.com/litesuits/android-common.git)|3.6k|
 |[execa](https://github.com/sindresorhus/execa.git)|3.5k|
 |[sh](https://github.com/mvdan/sh.git)|3.3k|
-|[haxor-news](https://github.com/donnemartin/haxor-news.git)|3.2k|
 |[across](https://github.com/teddysun/across.git)|3.2k|
+|[haxor-news](https://github.com/donnemartin/haxor-news.git)|3.2k|
 |[awesome-command-line-apps](https://github.com/herrbischoff/awesome-command-line-apps.git)|3.2k|
 |[typer](https://github.com/tiangolo/typer.git)|3.1k|
 |[vim-anywhere](https://github.com/cknadler/vim-anywhere.git)|3.1k|
