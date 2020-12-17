@@ -6,6 +6,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"io/ioutil"
 	"os"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -26,11 +27,14 @@ func init() {
 }
 
 func createMarkdown(topics []string, wg *sync.WaitGroup) {
-	wg.Add(len(topics))
+	count := len(topics)
+	wg.Add(count)
 	for _, topic := range topics {
 		go func() {
 			for range client.SortSearchRepositoryByTopic(topic) {
 				wg.Done()
+				count--
+				logrus.Info("wait for " + strconv.Itoa(count*10) + " second")
 			}
 		}()
 		time.Sleep(time.Second * 10)
@@ -38,12 +42,7 @@ func createMarkdown(topics []string, wg *sync.WaitGroup) {
 }
 
 func main() {
-	//syncTask()
-	//result, _ := client.ListSummaryOrganization("octokit")
-	//logrus.Println(result)
-	result,_ := client.GetRepositoryDetail("/google/go-github")
-	logrus.Info(result)
-
+	syncTask()
 }
 
 func syncTask() {
